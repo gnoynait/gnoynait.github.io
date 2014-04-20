@@ -197,21 +197,22 @@ function settingdone () {
 	initRoles();
 	nextCharacter = 0;
 	var li = "<li class=\"ui-field-contain\"> <label for=\"li{li}\">{name}</label> <select name=\"li{li}\" id=\"li{li}\" data-role=\"slider\" data-mini=\"true\"> <option value=\"on\">alive</option> <option value=\"off\">dead</option> </select> </li> ";
+	li = "<li><label>{name}</label></li>";
 	$("#playerStatus")[0].innerHTML = "";
 	for (var i = 0; i < people.length; i++) {
-		$("#playerStatus")[0].innerHTML += li.replace("{li}", i).replace("{li}", i).replace("{li}", i).replace("{name}", people[i].role.name);
+		//$("#playerStatus")[0].innerHTML += li.replace("{li}", i).replace("{li}", i).replace("{li}", i).replace("{name}", people[i].role.name);
+		$("#playerStatus")[0].innerHTML += li.replace ("{name}", people[i].role.name);
 	}
-	toSee();
 }
 function toSee () {
-	alert (nextCharacter);
-	$("#yourCharacter")[0].innerHTML = people[nextCharacter].role.name;
+	//alert (nextCharacter);
 	//$("#yourDescription")[0].innerHTML = people[nextCharacter].role.description;
 
-	if (nextCharacter == people.length - 1) {
+	if (nextCharacter == people.length) {
 		$("#toSeeBtn")[0].href="#host";
 		nextCharacter = 0;
 	} else {
+		$("#yourCharacter")[0].innerHTML = people[nextCharacter].role.name;
 		$("#toSeeBtn")[0].href="#seeCharacter";
 		nextCharacter++;
 	}
