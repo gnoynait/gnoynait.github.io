@@ -1,1 +1,104 @@
-hello world
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile: Theme Download</title>
+		<link rel="stylesheet" href="themes/werewolf.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	</head>
+	<body>
+		<div data-role="page" id="setting">
+			<div data-role="header" data-position="fixed"><h1>setting</h1></div>
+			<div role="main" class="ui-content">
+				<ul data-role="listview">
+					<li>
+					<label for="totalnumber">totalNumber:</label>
+					<input id="totalnumber" value="10" min="5" max="20" type="range"></input>
+					</li>
+					<li>
+					<label for="werewolfnumber">werewolfNumber:</label>
+					<input id="werewolfnumber" value="1" min="1" max="5" type="range"></input>
+					</li>
+					<li>
+
+					<fieldset data-role="controlgroup">
+						<legend>Character:</legend>
+						<input name="checkbox-v-2a" id="Oracle" type="checkbox">
+						<label for="Oracle">Oracle</label>
+						<input name="checkbox-v-2b" id="Wizard" type="checkbox">
+						<label for="Wizard">Wizard</label>
+						<input name="checkbox-v-2c" id="Hunter" type="checkbox">
+						<label for="Hunter">Hunter</label>
+					</fieldset>
+					</li>
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>footer</h4>
+				<!--<button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save
+				</button>-->
+				<a href="#seecharacter" data-icon="arrow-r" class="ui-btn-right">OK</a>
+			</div>
+		</div>
+		<div data-role="page" id="seecharacter" data-position="fixed">
+			<div data-role="header">
+				<h1>your character</h1>
+			</div>
+			<div role="main" class="ui-content">
+				your character is dadata.
+				descrtiptions:....
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>footer</h4>
+				<a href="#passtonext" data-icon"arraw-r" class="ui-btn-right">OK</a>
+			</div>
+		</div>
+		<div data-role="page" id="passtonext" data-position="fixed">
+			<div data-role="header">
+				<h1>please pass to next</h1>
+			</div>
+			<div role="main" class="ui-content">
+				pass to next please.
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>footer</h4>
+				<a href="#host" data-icon"arraw-r" class="ui-btn-right">OK</a>
+			</div>
+		</div>
+		<div data-role="page" id="host" data-position="fixed">
+			<div data-role="header">
+				<h1>status</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<form>
+					<ol data-role="listview" data-inset="false">
+						<li class="ui-field-contain">
+						<label for="r1">r1</label>
+						<select name="r1" id="r1" data-role="slider" data-mini="true">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+						</li>
+						<li class="ui-field-contain">
+						<label for="flip3">Slider flip switch:</label>
+						<select name="flip3" id="flip3" data-role="slider" data-mini="true">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+						</li>
+					</ol>
+				</form>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>footer</h4>
+				<a href="#setting" data-icon"arraw-r" class="ui-btn-right">OK</a>
+			</div>
+		</div>
+
+	</body>
+</html>

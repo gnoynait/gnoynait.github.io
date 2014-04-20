@@ -112,6 +112,11 @@ var Elder = {
 		return elder;
 	}
 };
+var NormalVillage = {
+	createNew: function () {
+		return villager.createNew ();
+	}
+};
 
 var Detective = {
 	detective: null,
@@ -119,3 +124,35 @@ var Detective = {
 		detective = player;
 	}
 };
+
+var roles = [Werewolf, Wizard, Oracle, Guardian, Elder, NomalVillage, Hunter, Miller];
+var people = [];
+function initRoles (n) {
+	people = [];
+	for (var i = 0; i < roles.length; i++) {
+		for (var j = 0; j < roles[i].count; j++) {
+			people.push (roles[i].createNew ());
+		}
+	}
+	for (var i = people.length - 1; i >= 0; i--) {
+		var r = (int) (Math.random () * (i + 1));
+		var t = people[i];
+		people[i] = people[r];
+		people[r] = t;
+	}
+}
+
+function wakeUp () {
+	if ((Guardian.guardian == null || Guardian.guarded != Werewolf.killed) &&
+	    (Wizard.wizard == null || Wizard.antidote != Werewolf.killed)) {
+
+		Werewolf.killed.die();
+		if (Miller.miller != null 
+		    && var i = Miller.lovers.indexof(Werewolf.killed) != -1) { 
+			Miller.lovers[1 - i].die();
+		}
+		if (Wizard.exist() && Wizard.poinson != null) {
+			Wizard.poison.die();
+		}
+	}
+}
