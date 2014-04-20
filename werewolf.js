@@ -199,7 +199,7 @@ function settingdone () {
 	var li = "<li class=\"ui-field-contain\"> <label for=\"li{li}\">{name}</label> <select name=\"li{li}\" id=\"li{li}\" data-role=\"slider\" data-mini=\"true\"> <option value=\"on\">alive</option> <option value=\"off\">dead</option> </select> </li> ";
 	li = "<li><label>{name}</label></li>";
 	$("#playerStatus")[0].innerHTML = "";
-	$("#playerStatus").listview("refresh");
+	$("#playerStatus").listview();
 	for (var i = 0; i < people.length; i++) {
 		//$("#playerStatus")[0].innerHTML += li.replace("{li}", i).replace("{li}", i).replace("{li}", i).replace("{name}", people[i].role.name);
 		$("#playerStatus")[0].innerHTML += li.replace ("{name}", people[i].role.name);
