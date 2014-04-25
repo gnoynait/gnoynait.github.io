@@ -1,124 +1,221 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>jQuery Mobile: Theme Download</title>
-		<link rel="stylesheet" href="themes/werewolf.min.css" />
-		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-		<script src="werewolf.js"></script>
-                <script>
-/*
-$(document).on("pagebeforechange", function (e, d){
-	if (typeof (d.toPage) != "string")
-		return;
-	alert (d.toPage)
-		
-});
-*/
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery Mobile: Theme Download</title>
+<link rel="stylesheet" href="themes/werewolf.min.css" />
+<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="werewolf.js"></script>
+<script>
+function display(i) {
+    $("#characterName").text(people[i].role.name);
+    $($("#characterList").children()[i]).html("OK");
+    $("#characterList").listview("refresh");
+}
+var currentCharacter = null;
 $(document).ready(function (){
 	$("#settingDoneBtn").on ("click", function(){
 		settingDone();
+		$("#characterAllSeenBtn").show();
+		for (var i = 0; i < people.length; i++) {
+			var li = $("<li><a onclick=\"display("+
+					i+")\" href=\"#characterPopup\" data-rel=\"popup\" "+
+					"data-transition=\"pop\"></a></li>");
+			$("div", li).hide();
+			li.appendTo ($("#characterList"));
+		}
 	});
 	$("#toSeeBtn").on ("click", function(){
 		toSee();
 	});
-	$(window).on("navigate", function(event, data){
-		if(data.state.direction == "back") {
-			window.history.forward(1);
+	$("#characterAllSeenBtn").on ("click", function (){
+		$("#characterAllSeenBtn").hide();
+		$("#characterList").empty();		
+		for (var i = 0; i < people.length; i++) {
+			var s = "<li class=\"ui-field-contain\"><label>" +
+			 people[i].role.name + 
+			 "</label><select data-role=\"flipswitch\"><option value=\"off\">live</option><option value=\"on\">dead</option></select>"
+                +"</li>";
+             $(s).appendTo ($("#characterList"));
 		}
+		$("#characterList").listview("refresh");
+		$("select", $("#characterList")).flipswitch();
 	});
-
-		
 });
                 </script>
 
-	</head>
-	<body>
-		<div data-role="page" id="setting">
-			<div data-role="header" data-position="fixed"><h1>SETTING</h1></div>
-			<div role="main" class="ui-content">
-				<ul data-role="listview">
-					<li class="ui-field-contain">
-					<label for="werewolfNumber">Werewolf:</label>
-					<input name="werewolfNumber" id="werewolfNumber" value="1" min="1" max="5" type="range"></input>
-					</li>
-					<li class="ui-field-contain">
-					<label for="normalNumber">NormalVillager:</label>
+</head>
+<body>
+	<div data-role="page" id="setting">
+		<div data-role="header" data-position="fixed">
+			<h1>SETTING</h1>
+		</div>
+		<div role="main" class="ui-content">
+			<ul data-role="listview">
+				<li class="ui-field-contain"><label for="werewolfNumber">Werewolf:</label>
+					<input name="werewolfNumber" id="werewolfNumber" value="1" min="1"
+					max="5" type="range"></input>
+				</li>
+				<li class="ui-field-contain"><label for="normalNumber">NormalVillager:</label>
 					<input id="normalNumber" value="0" min="0" max="10" type="range"></input>
-					</li>
-					<li>
+				</li>
+				<li>
 
 					<fieldset data-role="controlgroup">
 						<legend>Character:</legend>
-						<input id="addOracle" type="checkbox">
-						<label for="addOracle">Oracle</label>
-						<input id="addWizard" type="checkbox">
-						<label for="addWizard">Wizard</label>
-						<input id="addHunter" type="checkbox">
-						<label for="addHunter">Hunter</label>
-						<input id="addMiller" type="checkbox">
-						<label for="addMiller">Miller</label>
-						<input id="addGuardian" type="checkbox">
-						<label for="addGuardian">Guardian</label>
-						<input id="addElder" type="checkbox">
-						<label for="addElder">Elder</label>
+						<input id="addOracle" type="checkbox"> <label
+							for="addOracle">Oracle</label> <input id="addWizard"
+							type="checkbox"> <label for="addWizard">Wizard</label> <input
+							id="addHunter" type="checkbox"> <label for="addHunter">Hunter</label>
+						<input id="addMiller" type="checkbox"> <label
+							for="addMiller">Miller</label> <input id="addGuardian"
+							type="checkbox"> <label for="addGuardian">Guardian</label>
+						<input id="addElder" type="checkbox"> <label
+							for="addElder">Elder</label>
 
 					</fieldset>
-					</li>
-				</ul>
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<h4></h4>
-				<!--<button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save
-				</button>-->
-				<!--<a id="settingDoneBtn" href="#passtonext" data-icon="arrow-r" class="ui-btn-right">OK</a>-->
-				<a type="button" data-icon="check" data-iconpos="notext" id="settingDoneBtn" href="#passtonext" class="ui-btn-right">OK</a>
+				</li>
+			</ul>            
+		</div>
+		<button class="ui-button" id="settingDoneBtn">OK</button>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+			 <ul>
+			     <li><a href="#setting" data-icon="gear" class="ui-btn-active">SETTING</a></li>
+			     <li><a href="#characterPage" data-icon="user">CHARACTER</a></li>
+			     <li><a href="#progressPage" data-icon="edit">STATUS</a></li>			 
+			 </ul>
 			</div>
 		</div>
-		<div data-role="page" id="seeCharacter" data-position="fixed">
-			<div data-role="header">
-				<h1>CHARACTER</h1>
-			</div>
-			<div role="main" class="ui-content">
-				<h2 id="yourCharacter"></h2>.
-				<div id="yourDescription">
-				</div>
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<h4></h4>
-				<a href="#passtonext" id="haveSeenBtn" data-icon="check" data-iconpos="notext" class="ui-btn-right">OK</a>
-			</div>
+	</div>
+	<div data-role="page" id="seeCharacter" data-position="fixed">
+		<div data-role="header">
+			<h1>CHARACTER</h1>
 		</div>
-		<div data-role="page" id="passtonext" data-position="fixed">
-			<div data-role="header">
-				<h1>PASS</h1>
-			</div>
-			<div role="main" class="ui-content">
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<h4></h4>
-				<a href="#host" id="toSeeBtn" data-icon="carat-r" data-iconpos="notext" class="ui-btn-right">OK</a>
-			</div>
+		<div role="main" class="ui-content">
+			<h2 id="yourCharacter"></h2>
+			.
+			<div id="yourDescription"></div>
 		</div>
-		<div data-role="page" id="host" data-position="fixed">
-			<div data-role="header">
-				<h1>STATUS</h1>
-			</div>
-			<div role="main" class="ui-content">
-				<form>
-					<ol id="playerStatus" data-role="listview" data-inset="true">
-					</ol>
-				</form>
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<h4></h4>
-				<a href="#setting" data-icon="home" data-iconpos="notext" class="ui-btn-right">Restart</a>
-			</div>
+		<div data-role="footer" data-position="fixed">
+			<h4></h4>
+			<a href="#passtonext" id="haveSeenBtn" data-icon="check"
+				data-iconpos="notext" class="ui-btn-right">OK</a>
 		</div>
+	</div>
+	<div data-role="page" id="passtonext" data-position="fixed">
+		<div data-role="header">
+			<h1>PASS</h1>
+		</div>
+		<div role="main" class="ui-content"></div>
+		<div data-role="footer" data-position="fixed">
+			<h4></h4>
+			<a href="#host" id="toSeeBtn" data-icon="carat-r"
+				data-iconpos="notext" class="ui-btn-right">OK</a>
+		</div>
+	</div>
+	<div data-role="page" id="characterPage" data-position="fixed">
+		<div data-role="header">
+			<h1>CHARACTER</h1>
+		</div>
+		<div role="main" id="characterContent" class="ui-content">
+		  <ol id="characterList" data-role="listview" data-inset="true"></ol>
+		  <button id="characterAllSeenBtn">OK</button>
+		</div>
+		<div data-role="popup" id="characterPopup">
+		  <p>Your character is:</p>
+			<h2 id="characterName"></h2>
+		</div>
+		<div data-role="footer" data-pos="fixed">
+			 <div data-role="navbar">
+             <ul>
+                 <li><a href="#setting" data-icon="gear">SETTING</a></li>
+                 <li><a href="#characterPage" data-icon="user" class="ui-btn-active">CHARACTER</a></li>
+                 <li><a href="#progressPage" data-icon="edit">STATUS</a></li>            
+             </ul>
+            </div>
+		</div>
+	</div>
+	<div data-role="page" id="progressPage" data-position="fixed">
+	   <div data-role="header">
+            <h1>Progress</h1>
+        </div>
+        <div role="main" class="ui-content">
+			
+			<ol>
+			<li data-role="collapsible" >
+                <h4>Miller</h4>
+                <ul data-role="listview">
+                    <li class="ui-field-contain">
+                        <label>Lover 1:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </li>
+                    <li class="ui-field-contain">
+                        <label>Lover 2:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </li>
+                </ul>
+            </li>
+            <li data-role="collapsible" >
+                <h4>Guardian</h4>
+                    <div class="ui-field-contain">
+                        <label>Guard:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </div>
+            </li>
+            <li data-role="collapsible" >
+                <h4>Werewolf</h4>
+                    <div class="ui-field-contain">
+                        <label>Kill:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </div>
+            </li>
+            <li data-role="collapsible" >
+                <h4>Wizard</h4>
+                    <div class="ui-field-contain">
+                        <label>Antidote:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label>Poison:</label>
+                        <input type="text" value="" data-clear-btn="true">
+                    </div>
+            </li>
+            <li data-role="collapsible"><h4>Oracle</h4></li>
+            </ol>
 
-	</body>
+		</div>
+        <div data-role="footer" data-pos="fixed">
+             <div data-role="navbar">
+             <ul>
+                 <li><a href="#setting" data-icon="gear">SETTING</a></li>
+                 <li><a href="#characterPage" data-icon="user">CHARACTER</a></li>
+                 <li><a href="#progressPage" data-icon="edit" class="ui-btn-active">STATUS</a></li>            
+             </ul>
+            </div>
+        </div>
+	</div>
+	<div data-role="page" id="host" data-position="fixed">
+		<div data-role="header">
+			<h1>STATUS</h1>
+		</div>
+		<div role="main" class="ui-content">
+			<form>
+				<ol id="playerStatus" data-role="listview" data-inset="true">
+				</ol>
+			</form>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<h4></h4>
+			<a href="#setting" data-icon="home" data-iconpos="notext"
+				class="ui-btn-right">Restart</a>
+		</div>
+	</div>
+</body>
 </html>
