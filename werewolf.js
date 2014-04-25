@@ -167,23 +167,6 @@ function initRoles (n) {
 		people[r] = t;
 	}
 }
-/**
-function wakeUp () {
-	if ((Guardian.guardian == null || Guardian.guarded != Werewolf.killed) &&
-	    (Wizard.wizard == null || Wizard.antidote != Werewolf.killed)) {
-
-		Werewolf.killed.die();
-		if (Miller.miller != null 
-		    && var i = Miller.lovers.indexof(Werewolf.killed) != -1) { 
-			Miller.lovers[1 - i].die();
-		}
-		if (Wizard.exist() && Wizard.poinson != null) {
-			Wizard.poison.die();
-		}
-	}
-}
-*/
-var nextCharacter = 0;
 function settingDone () {
 	//alert($("#addWizard")[0].checked);
 	Werewolf.count = $("#werewolfNumber")[0].value;
@@ -195,28 +178,4 @@ function settingDone () {
 	Guardian.count = $("#addGuardian")[0].checked;
 	Elder.count = $("#addElder")[0].checked;
 	initRoles();
-	nextCharacter = 0;
-	var li = "<li class=\"ui-field-contain\"> <label for=\"li{li}\">{name}</label> <select name=\"li{li}\" id=\"li{li}\" data-role=\"slider\" data-mini=\"true\"> <option value=\"on\">alive</option> <option value=\"off\">dead</option> </select> </li> ";
-	li = "<li>{name}</li>";
-	$("#playerStatus")[0].innerHTML = "";
-	$("#playerStatus").listview();
-	for (var i = 0; i < people.length; i++) {
-		//$("#playerStatus")[0].innerHTML += li.replace("{li}", i).replace("{li}", i).replace("{li}", i).replace("{name}", people[i].role.name);
-		$("#playerStatus")[0].innerHTML += li.replace ("{name}", people[i].role.name);
-	}
-	$("#playerStatus").listview("refresh");
-}
-function toSee () {
-	//alert (nextCharacter);
-	//$("#yourDescription")[0].innerHTML = people[nextCharacter].role.description;
-
-	if (nextCharacter == people.length) {
-		$("#toSeeBtn")[0].href="#host";
-		nextCharacter = 0;
-	} else {
-		//$("#yourCharacter")[0].innerHTML = people[nextCharacter].role.name;
-		$("#yourCharacter").html(people[nextCharacter].role.name);
-		$("#toSeeBtn")[0].href="#seeCharacter";
-		nextCharacter++;
-	}
 }
