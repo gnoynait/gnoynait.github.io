@@ -20,7 +20,7 @@
 <script>
 	function display(i) {
 		$("#characterName").text(people[i].role.name);
-		$($("#characterList").children()[i]).html("OK");
+		$($("#characterList").children()[i]).html("<a></a>");
 		$("#characterList").listview("refresh");
 	}
 	function settingDone() {
@@ -44,7 +44,7 @@
 		for ( var i = 0; i < people.length; i++) {
 			var li = $("<li><a onclick=\"display(" + i
 					+ ")\" href=\"#characterPopup\" data-rel=\"popup\" "
-					+ "data-transition=\"pop\"></a></li>");
+					+ "data-transition=\"pop\">查看角色</a></li>");
 			$("div", li).hide();
 			li.appendTo($("#characterList"));
 		}
@@ -61,7 +61,7 @@
 		for ( var i = 0; i < people.length; i++) {
 			var s = "<li class=\"ui-field-contain\"><label>"
 					+ people[i].role.name
-					+ "</label><select data-role=\"flipswitch\"><option value=\"off\">live</option><option value=\"on\">dead</option></select>"
+					+ "</label><select data-mini=\"true\" data-role=\"flipswitch \"><option value=\"off\">死</option><option selected=\"selected\" value=\"on\">生</option></select>"
 					+ "</li>";
 			$(s).appendTo($("#characterList"));
 		}
@@ -74,117 +74,120 @@
 <body>
 	<div data-role="page" id="setting">
 		<div data-role="header" data-position="fixed">
-			<h1>SETTING</h1>
+			<h1>狼人杀</h1>
 		</div>
 		<div role="main" class="ui-content">
 			<ul data-role="listview">
-				<li class="ui-field-contain"><label for="werewolfNumber">Werewolf:</label>
+				<li class="ui-field-contain"><label for="werewolfNumber">狼人:</label>
 					<input name="werewolfNumber" id="werewolfNumber" value="1" min="1"
-					max="5" type="range"></input>
+					max="6" type="range"></input>
 				</li>
-				<li class="ui-field-contain"><label for="normalNumber">NormalVillager:</label>
-					<input id="normalNumber" value="0" min="0" max="10" type="range"></input>
+				<li class="ui-field-contain"><label for="normalNumber">普通村民:</label>
+					<input id="normalNumber" value="1" min="1" max="6" type="range"></input>
 				</li>
 				<li>
 
 					<fieldset data-role="controlgroup">
-						<legend>Character:</legend>
+						<legend>功能角色:</legend>
 						<input id="addOracle" type="checkbox"> <label
-							for="addOracle">Oracle</label> <input id="addWizard"
-							type="checkbox"> <label for="addWizard">Wizard</label> <input
-							id="addHunter" type="checkbox"> <label for="addHunter">Hunter</label>
+							for="addOracle">预言家</label> <input id="addWizard"
+							type="checkbox"> <label for="addWizard">女巫</label> <input
+							id="addHunter" type="checkbox"> <label for="addHunter">猎人</label>
 						<input id="addMiller" type="checkbox"> <label
 							for="addMiller">Miller</label> <input id="addGuardian"
-							type="checkbox"> <label for="addGuardian">Guardian</label>
+							type="checkbox"> <label for="addGuardian">守卫</label>
 						<input id="addElder" type="checkbox"> <label
-							for="addElder">Elder</label> <input id="addIdiot" type="checkbox"></input><label
-							for="addIdiot">Idiot</label> <input id="addScapegoat"
-							type="checkbox"></input><label for="addScapegoat">Scapegoat</label>
+							for="addElder">长老</label> <input id="addIdiot" type="checkbox"></input><label
+							for="addIdiot">白痴</label> <input id="addScapegoat"
+							type="checkbox"></input><label for="addScapegoat">替罪羊</label>
 
 					</fieldset></li>
 			</ul>
 		</div>
-		<button class="ui-button" id="settingDoneBtn"
-			onclick="settingDoneButtonClicked()">OK</button>
+		<div>
+		<button id="settingDoneBtn" onclick="settingDoneButtonClicked()">新游戏</button>
+		</div>
 		<div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#setting" data-icon="gear" class="ui-btn-active">SETTING</a>
+					<li><a href="#setting" data-icon="gear" class="ui-btn-active">设置</a>
 					</li>
-					<li><a href="#characterPage" data-icon="user">CHARACTER</a></li>
-					<li><a href="#progressPage" data-icon="edit">STATUS</a></li>
+					<li><a href="#characterPage" data-icon="user">角色</a></li>
+					<li><a href="#progressPage" data-icon="edit">状态</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div data-role="page" id="characterPage" data-position="fixed">
 		<div data-role="header">
-			<h1>CHARACTER</h1>
+			<h1>狼人杀</h1>
 		</div>
 		<div role="main" id="characterContent" class="ui-content">
-			<ol id="characterList" data-role="listview" data-inset="true"></ol>
-			<button id="characterAllSeenBtn"
-				onclick="characterAllSeenBtnClicked()">OK</button>
+			<ol id="characterList" data-role="listview" data-inset="false"></ol>
 		</div>
+			<div>
+			<button id="characterAllSeenBtn"
+				onclick="characterAllSeenBtnClicked()">开始</button>
+			</div>
 		<div data-role="popup" id="characterPopup" style="max-width:400px;">
-			<div data-role="header">Your character is:</div>
+			<div data-role="header">你的角色是:</div>
 			<div role="main" class="ui-content">
 			<h2 id="characterName"></h2>
-			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">确认</a>
 			</div>
 			
 		</div>
 		<div data-role="footer" data-pos="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#setting" data-icon="gear">SETTING</a></li>
+					<li><a href="#setting" data-icon="gear">设置</a></li>
 					<li><a href="#characterPage" data-icon="user"
-						class="ui-btn-active">CHARACTER</a></li>
-					<li><a href="#progressPage" data-icon="edit">STATUS</a></li>
+						class="ui-btn-active">角色</a></li>
+					<li><a href="#progressPage" data-icon="edit">状态</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div data-role="page" id="progressPage" data-position="fixed">
 		<div data-role="header">
-			<h1>Progress</h1>
+			<h1>狼人杀</h1>
 		</div>
 		<div role="main" class="ui-content">
 
 
 			<div data-role="collapsible">
-				<h4>Miller</h4>
+				<h4>丘比特</h4>
 				<ul data-role="listview">
-					<li class="ui-field-contain"><label>Lover 1:</label> <input
+					<li class="ui-field-contain"><label>情侣1:</label> <input
 						type="text" value="" data-clear-btn="true">
 					</li>
-					<li class="ui-field-contain"><label>Lover 2:</label> <input
+					<li class="ui-field-contain"><label>情侣2:</label> <input
 						type="text" value="" data-clear-btn="true">
 					</li>
 				</ul>
 			</div>
 			<div data-role="collapsible">
-				<h4>Guardian</h4>
+				<h4>守卫</h4>
 				<div class="ui-field-contain">
-					<label>Guard:</label> <input type="text" value=""
+					<label>守护:</label> <input type="text" value=""
 						data-clear-btn="true">
 				</div>
 			</div>
 			<div data-role="collapsible">
-				<h4>Werewolf</h4>
+				<h4>狼人</h4>
 				<div class="ui-field-contain">
-					<label>Kill:</label> <input type="text" value=""
+					<label>杀:</label> <input type="text" value=""
 						data-clear-btn="true">
 				</div>
 			</div>
 			<div data-role="collapsible">
-				<h4>Wizard</h4>
+				<h4>女巫</h4>
 				<div class="ui-field-contain">
-					<label>Antidote:</label> <input type="text" value=""
+					<label>救:</label> <input type="text" value=""
 						data-clear-btn="true">
 				</div>
 				<div class="ui-field-contain">
-					<label>Poison:</label> <input type="text" value=""
+					<label>毒:</label> <input type="text" value=""
 						data-clear-btn="true">
 				</div>
 			</div>
@@ -192,10 +195,10 @@
 		<div data-role="footer" data-pos="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#setting" data-icon="gear">SETTING</a></li>
-					<li><a href="#characterPage" data-icon="user">CHARACTER</a></li>
+					<li><a href="#setting" data-icon="gear">设置</a></li>
+					<li><a href="#characterPage" data-icon="user">角色</a></li>
 					<li><a href="#progressPage" data-icon="edit"
-						class="ui-btn-active">STATUS</a></li>
+						class="ui-btn-active">状态</a></li>
 				</ul>
 			</div>
 		</div>

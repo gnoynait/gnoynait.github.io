@@ -35,7 +35,7 @@ var Player = {
 var Werewolf = {
 	aliveNumber : 0,
 	count : 0,
-	name : "Werewolf",
+	name : "狼人",
 	createNew : function() {
 		var werewolf = Player.createNew();
 		werewolf.role = Werewolf;
@@ -64,7 +64,7 @@ var Miller = {
 	lovers : [ 0, 0 ],
 	miller : null,
 	count : 0,
-	name : "Miller",
+	name : "丘比特",
 	createNew : function() {
 		if (Miller.miller == null)
 			Miller.miller = Villager.createNew();
@@ -76,7 +76,7 @@ var Miller = {
 var Oracle = {
 	oracle : null,
 	count : 0,
-	name : "Oracle",
+	name : "预言家",
 	createNew : function() {
 		if (Oracle.oracle == null)
 			Oracle.oracle = Villager.createNew();
@@ -90,7 +90,7 @@ var Wizard = {
 	hasAntidote : true,
 	wizard : null,
 	count : 0,
-	name : "Wizard",
+	name : "女巫",
 	createNew : function() {
 		if (Wizard.wizard == null)
 			Wizard.wizard = Villager.createNew();
@@ -102,7 +102,7 @@ var Wizard = {
 var Hunter = {
 	hunter : null,
 	count : 0,
-	name : "Hunter",
+	name : "猎人",
 	createNew : function() {
 		if (Hunter.hunter == null)
 			Hunter.hunter = Villager.createNew();
@@ -114,7 +114,7 @@ var Hunter = {
 var Guardian = {
 	guardian : null,
 	count : 0,
-	name : "Guardian",
+	name : "守卫",
 	createNew : function() {
 		if (Guardian.guadian == null)
 			Guardian.guadian = Villager.createNew();
@@ -126,7 +126,7 @@ var Guardian = {
 var Elder = {
 	elder : null,
 	count : 0,
-	name : "Elder",
+	name : "长老",
 	createNew : function() {
 		if (Elder.elder == null)
 			Elder.elder = Villager.createNew();
@@ -137,7 +137,7 @@ var Elder = {
 var Idiot = {
 	idiot : null,
 	count : 0,
-	name : "Idiot",
+	name : "白痴",
 	createNew : function() {
 		if (Idiot.idiot == null)
 			Idiot.idiot = Villager.createNew();
@@ -148,7 +148,7 @@ var Idiot = {
 var Scapegoat = {
 	scapegoat : null,
 	count : 0,
-	name : "Scapegoat",
+	name : "替罪羊",
 	createNew : function() {
 		if (Scapegoat.scapegoat == null)
 			Scapegoat.scapegoat = Villager.createNew();
@@ -158,7 +158,7 @@ var Scapegoat = {
 };
 var NormalVillager = {
 	count : 0,
-	name : "NormalVillager",
+	name : "普通村民",
 	createNew : function() {
 		var villager = Villager.createNew();
 		villager.role = NormalVillager;
