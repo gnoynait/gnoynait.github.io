@@ -43,7 +43,7 @@
 		for ( var i = 0; i < people.length; i++) {
 			var li = $("<li><a onclick=\"display(" + i
 					+ ")\" href=\"#characterPopup\" data-position-to=\"window\" data-rel=\"popup\" "
-					+ "data-transition=\"pop\">查看角色</a></li>");
+					+ "data-transition=\"pop\">查看身份</a></li>");
 			$("div", li).hide();
 			li.appendTo($("#characterList"));
 		}
@@ -134,8 +134,8 @@
 			<button id="characterAllSeenBtn"
 				onclick="characterAllSeenBtnClicked()">开始</button>
 			</div>
-		<div data-role="popup" id="characterPopup" data-dismissible="false" style="max-width:400px;">
-			<div data-role="header"><h1>你的角色是:</h1></div>
+		<div data-role="popup" id="characterPopup" data-dismissible="false" style="width:200px;">
+			<div data-role="header"><h1>身份:</h1></div>
 			<div role="main" class="ui-content">
 			<h2 id="characterName"></h2>
 			<a href="#" class="ui-btn ui-corner-all ui-shadow" data-rel="back">确认</a>
