@@ -2,7 +2,7 @@
 layout: post
 title: hello world!
 description: "this is for test."
-comments: yes
+disqus_comments: yes
 ---
 ```C++
 #include<iostream>

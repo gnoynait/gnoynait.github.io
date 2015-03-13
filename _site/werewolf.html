@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Werewolf</title>
+<link rel="stylesheet" href="themes/werewolf.min.css" />
+<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+<!-- <link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script> -->
+	<link rel="stylesheet" href="jquery.mobile.structure-1.4.2.min.css" />
+<script src="jquery-1.11.0.min.js"></script>
+<script
+    src="jquery.mobile-1.4.2.min.js"></script>
+<script src="werewolf.js"></script>
+<script>
+	function display(i) {
+		$("#characterName").text(people[i].role.name);
+		$($("#characterList").children()[i]).html("<a></a>");
+		$("#characterList").listview("refresh");
+	}
+	function settingDone() {
+		// alert($("#addWizard")[0].checked);
+		Werewolf.count = $("#werewolfNumber")[0].value;
+		NormalVillager.count = $("#normalNumber")[0].value;
+		Oracle.count = $("#addOracle")[0].checked;
+		Wizard.count = $("#addWizard")[0].checked;
+		Hunter.count = $("#addHunter")[0].checked;
+		Miller.count = $("#addMiller")[0].checked;
+		Guardian.count = $("#addGuardian")[0].checked;
+		Elder.count = $("#addElder")[0].checked;
+		Idiot.count = $("#addIdiot")[0].checked;
+		Scapegoat.count = $("#addScapegoat")[0].checked;
+		initRoles();
+	}
+	function startGame() {
+		settingDone();
+		$("#characterAllSeenBtn").show();
+		$("#characterList").empty();
+		for ( var i = 0; i < people.length; i++) {
+			var li = $("<li><a onclick=\"display(" + i
+					+ ")\" href=\"#characterPopup\" data-position-to=\"window\" data-rel=\"popup\" "
+					+ "data-transition=\"pop\">查看身份</a></li>");
+			$("div", li).hide();
+			li.appendTo($("#characterList"));
+		}
+		$("#characterList").listview();
+		$("#characterList").listview("refresh");
+		$.mobile.changePage("#characterPage");
+	}
+	function settingDoneButtonClicked() {
+		startGame();
+	}
+	function characterAllSeenBtnClicked() {
+		$("#characterAllSeenBtn").hide();
+		$("#characterList").empty();
+		for ( var i = 0; i < people.length; i++) {
+			var s = "<li class=\"ui-field-contain\"><label>"
+					+ people[i].role.name
+					+ "</label><select data-mini=\"true\" data-role=\"flipswitch \"><option value=\"off\">死</option><option selected=\"selected\" value=\"on\">生</option></select>"
+					+ "</li>";
+			$(s).appendTo($("#characterList"));
+		}
+		$("#characterList").listview("refresh");
+		$("select", $("#characterList")).flipswitch();
+	}
+</script>
+
+</head>
+<body>
+	<div data-role="page" id="setting">
+		<div data-role="header" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#setting" data-icon="gear" data-iconpos="notext" class="ui-btn-active"></a>
+					</li>
+					<li><a href="#characterPage" data-iconpos="notext" data-icon="user"></a></li>
+					<li><a href="#progressPage" data-iconpos="notext" data-icon="edit"></a></li>
+				</ul>
+			</div>
+
+		</div>
+		<div role="main" class="ui-content">
+			<ul data-role="listview">
+				<li class="ui-field-contain"><label for="werewolfNumber">狼人:</label>
+					<input name="werewolfNumber" id="werewolfNumber" value="1" min="1"
+					max="6" type="range" data-highlight="true"></input>
+				</li>
+				<li class="ui-field-contain"><label for="normalNumber">普通村民:</label>
+					<input id="normalNumber" value="1" min="1" max="6" type="range" data-highlight="true"></input>
+				</li>
+				<li>
+
+					<fieldset data-role="controlgroup">
+						<legend>功能角色:</legend>
+						<input id="addOracle" type="checkbox"> <label
+							for="addOracle">预言家</label> <input id="addWizard"
+							type="checkbox"> <label for="addWizard">女巫</label> <input
+							id="addHunter" type="checkbox"> <label for="addHunter">猎人</label>
+						<input id="addMiller" type="checkbox"> <label
+							for="addMiller">丘比特</label> <input id="addGuardian"
+							type="checkbox"> <label for="addGuardian">守卫</label>
+						<input id="addElder" type="checkbox"> <label
+							for="addElder">长老</label> <input id="addIdiot" type="checkbox"></input><label
+							for="addIdiot">白痴</label> <input id="addScapegoat"
+							type="checkbox"></input><label for="addScapegoat">替罪羊</label>
+
+					</fieldset></li>
+			</ul>
+		</div>
+		<div>
+		<button id="settingDoneBtn" onclick="settingDoneButtonClicked()">新游戏</button>
+		</div>
+	</div>
+	<div data-role="page" id="characterPage" data-position="fixed">
+		<div data-role="header">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#setting" data-iconpos="notext" data-icon="gear"></a></li>
+					<li><a href="#characterPage" data-iconpos="notext" data-icon="user"
+						class="ui-btn-active"></a></li>
+					<li><a href="#progressPage" data-iconpos="notext" data-icon="edit"></a></li>
+				</ul>
+			</div>
+
+		</div>
+		<div role="main" id="characterContent" class="ui-content">
+			<ol id="characterList" data-role="listview" data-inset="false"></ol>
+		</div>
+			<div>
+			<button id="characterAllSeenBtn"
+				onclick="characterAllSeenBtnClicked()">开始</button>
+			</div>
+		<div data-role="popup" id="characterPopup" data-dismissible="false" style="width:200px;">
+			<div data-role="header"><h1>身份:</h1></div>
+			<div role="main" class="ui-content">
+			<h2 id="characterName"></h2>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow" data-rel="back">确认</a>
+			</div>
+			
+		</div>
+	</div>
+	<div data-role="page" id="progressPage" data-position="fixed">
+		<div data-role="header">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#setting" data-iconpos="notext" data-icon="gear"></a></li>
+					<li><a href="#characterPage" data-iconpos="notext" data-icon="user"></a></li>
+					<li><a href="#progressPage" data-iconpos="notext" data-icon="edit" class="ui-btn-active"></a></li>
+				</ul>
+			</div>
+
+		</div>
+		<div role="main" class="ui-content">
+
+
+			<div data-role="collapsible">
+				<h4>丘比特</h4>
+				<ul data-role="listview">
+					<li class="ui-field-contain"><label>情侣1:</label> <input type="text" value="" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain"><label>情侣2:</label> <input
+						type="text" value="" data-clear-btn="true">
+					</li>
+				</ul>
+			</div>
+			<div data-role="collapsible">
+				<h4>守卫</h4>
+				<div class="ui-field-contain">
+					<label>守护:</label> <input type="text" value=""
+						data-clear-btn="true">
+				</div>
+			</div>
+			<div data-role="collapsible">
+				<h4>狼人</h4>
+				<div class="ui-field-contain">
+					<label>杀:</label> <input type="text" value=""
+						data-clear-btn="true">
+				</div>
+			</div>
+			<div data-role="collapsible">
+				<h4>女巫</h4>
+				<div class="ui-field-contain">
+					<label>救:</label> <input type="text" value=""
+						data-clear-btn="true">
+				</div>
+				<div class="ui-field-contain">
+					<label>毒:</label> <input type="text" value=""
+						data-clear-btn="true">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
