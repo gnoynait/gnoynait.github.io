@@ -1,4 +1,3 @@
-baseurl: /pawnty
 highlighter: null
 lsi: false
 permalink: /:year/:month/:day/:title.html
