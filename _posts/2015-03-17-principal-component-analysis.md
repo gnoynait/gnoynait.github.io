@@ -56,7 +56,7 @@ of $$S$$ and $$\lambda_i$$ is its corresponding eigenvalue, which means
 
 $$
 S u_i = \lambda_i u_i, \\
-u_i^{mathrm T} S u_i = \lambda_i,
+u_i^{\mathrm T} S u_i = \lambda_i,
 $$
 
 then $$J = \sum_{i=M+1}^D \lambda_i$$. Thus we can choose $$u_i, i=M+1, \dots, D$$ to be eigen
